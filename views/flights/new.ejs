@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<form id="new-form" action="/flights" method="POST">
+    <label>Airline- use IATA Codes</label>
+    <input type="text" name="airline">
+    <label>Flight Number</label>
+    <input type="number" min="10" max="9999" name="flightNo">
+    <label>Departs</label>
+    <input type="datetime-local" class="cal" name="departs">
+    <br>
+    <br>
+    <label>Arrives</label>
+    <input type="datetime-local" class="cal" name="arrival">
+    <Label>Available Airports</Label>
+    <select name="airports">
+      <option value="AUS">AUS</option>
+      <option value="DAL">LAX</option>
+      <option value="LAX">DAL</option>
+      <option value="SEA">SEA</option>
+    </select>
+
+    <input type="submit" value="Add Flight">
+            </div>
+  </form>
+
+  <%- include('../partials/footer') %>
+
+  

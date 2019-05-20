@@ -1,0 +1,63 @@
+<%- include('../partials/header') %>
+
+<section id="Flight Details Page">
+
+  <div>Departs: </div>
+  <div><%= flight.departs %></div>
+  <div>Carrier </div>
+  <div><%= flight.airline %></div>
+</section>
+<br><br>
+
+<form id="ticketId" action="/flights/<%= flight._id%>/tickets" method="POST">
+  <label>Seat Order: A1 - F99</label>
+  <input type="text" name="seat" required pattern="[A-F][1-9]\d?">
+  <label>Price</label>
+  <input type="number" min="0" name="price">
+  <br>
+  <br>
+
+  <input type="submit" value="tickets">
+</form>
+
+<h2>To these Destinations</h2>
+<form id="add-destination"  method="POST"
+ action="/flights/<%= flight._id %>/destinations">
+ <Label>Arrival Time:</Label>
+ <input type="datetime-local" id="cal" name="arrival">
+  <select name="airport">
+    <option value="AUS">AUS</option>
+    <option value="DAL">DAL</option>
+    <option value="LAX">LAX</option>
+    <option value="SEA">SEA</option>
+  </select>
+  <button type="submit" value="Add Destination">Add Destination</button>
+</form>
+
+
+<% if (flight.destinations.length) { %>
+      <% flight.destinations.forEach(function(f) { %>
+        <tr>
+          <td><%= f.createdAt.toLocaleDateString() %></td>
+          <br>
+          <td><%= f.airline %></td>
+          - Date created
+          <br>
+          <td><%= f.airport %></td>
+          <br>
+          <td><%= f.arrival %></td>
+          - Arrival Time
+          <br>
+          <br>
+          <br>
+          <td><% console.log(f.arrival) %></td>
+          <td><% console.log(f.airport) %></td>
+        </tr>
+      <% }); %>
+<% } else { %>
+  <h5>No Available Destinations</h5>
+<% } %>
+
+
+
+  <%- include('../partials/footer') %>

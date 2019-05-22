@@ -6,10 +6,19 @@
   <div><%= flight.departs %></div>
   <div>Carrier </div>
   <div><%= flight.airline %></div>
+  <div><% if (ticket.flight) { %>
+    <br>
+    <%= ticket.seat; %>
+    <br>
+    <%= ticket.price; %>
+    <br>
+    <% } %>
+  </div>
+  <br>
 </section>
 <br><br>
 
-<form id="ticketId" action="/flights/<%= flight._id%>/tickets" method="POST">
+<form id="ticketId" action="/flights/<%= flight._id%>" method="POST">
   <label>Seat Order: A1 - F99</label>
   <input type="text" name="seat" required pattern="[A-F][1-9]\d?">
   <label>Price</label>
@@ -17,7 +26,7 @@
   <br>
   <br>
 
-  <input type="submit" value="tickets">
+  <input type="submit" name="flight" value="<% flight._id%>">Yes</input>
 </form>
 
 <h2>To these Destinations</h2>
@@ -50,12 +59,31 @@
           <br>
           <br>
           <br>
-          <td><% console.log(f.arrival) %></td>
-          <td><% console.log(f.airport) %></td>
         </tr>
       <% }); %>
 <% } else { %>
   <h5>No Available Destinations</h5>
+<% } %>
+
+<% if (ticket.length ) { %>
+  <% console.log(ticket) %>
+  <% console.log(ticket.seat) %>
+  <% ticket.forEach(function(t) { %>
+    <tr>
+      <td><%= t.createdAt.toLocaleDateString() %></td>
+      <br>
+      <td><%= t.seat %></td>
+      - Seat Assignment
+      <br>
+      <td><%= t.price %></td>
+      - Price
+      <br>
+      <br>
+      <br>
+    </tr>
+  <% })  %>
+<% } else { %>
+<h5>No Seats Assigned</h5>
 <% } %>
 
 

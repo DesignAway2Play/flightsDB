@@ -34,11 +34,23 @@ function show(req, res) {
   }
 
   function addToFlight(req, res) {
+  
+    req.body.flight = req.params.id;
+    Ticket.create(req.body, function(err, ticket) {
+       res.redirect(`/flights/${req.params.id}`);
+      });
+    };
+ 
+
+
+/*
+  function addToFlight(req, res) {
     Flight.findById(req.params.id, function (err, flight) {
       Ticket.flight.push(req.body.ticketId);
+      Ticket.seat.push(req.body)
       Ticket.save(function (err) {
         res.redirect(`/flights/${Flight._id}`);
       });
     });
   }
-
+*/
